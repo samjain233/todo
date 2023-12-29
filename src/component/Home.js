@@ -26,8 +26,9 @@ export const Home = () => {
 
     // State for managing visibility of delete confirmation modal
     const [confirm, setConfirm] = React.useState(false);
-//Heading of mini window
-const [head,setHead]=useState("Pending");
+    //Heading of mini window
+    const [head, setHead] = useState("Pending Task");
+    const [tab, setTab] = useState({a:"#ACA7D5",b:"#F5F4FFE8"});
     // Function to handle window resize and update isDesktop state
     const handleResize = () => {
         setIsDesktop(window.innerWidth > 1080);
@@ -69,13 +70,15 @@ const [head,setHead]=useState("Pending");
     // Function to handle completion of tasks
     function handleComplete() {
         setData(data1.filter(item => item.isCompleted));
-        setHead("Completed");
+        setHead("Completed Task");
+        setTab({a:"#F5F4FFE8",b:"#ACA7D5"}); 
     }
 
     // Function to handle displaying pending tasks
     function handlePending() {
         setData(data1);
-        setHead("Pending");
+        setHead("Pending Task");
+        setTab({a:"#ACA7D5",b:"#F5F4FFE8"});
     }
 
     // Function to handle task deletion
@@ -93,7 +96,7 @@ const [head,setHead]=useState("Pending");
 
             {/* Sort and create task buttons */}
             <div className='p-4 md:p-8 w-full flex flex-col md:flex-row justify-center mb-2'>
-             <Topbar/>
+                <Topbar />
             </div>
 
             {/* Task list and details */}
@@ -104,13 +107,13 @@ const [head,setHead]=useState("Pending");
                         <div className='w-full'>
                             <div style={{ height: '70vh', background: "linear-gradient(180deg, rgba(213, 212, 255, 0.65) -1.73%, #F7F7FF 100%)" }} className="w-full  p-4  rounded-xl   overflow-y-auto">
                                 <div className='flex justify-between'>
-                                    <div className='flex text-2xl'>
-                                       {head}
+                                    <div className='flex font-semibold text-2xl'>
+                                        {head}
                                     </div>
 
                                     {/* Create New Task button (visible on larger screens) */}
-                                    <div onClick={createTask} className="flex-col justify-center p-2 bg-blue-900 hidden md:block lg:hidden lg:mx-2  rounded-xl  text-white rounded  ">
-                                        Create New
+                                    <div style={{ background: '#3D00C0' }} onClick={createTask} className="flex-col justify-center p-2 px-8 font-semibold  hidden md:block lg:hidden lg:mx-2  rounded-xl  text-white rounded  ">
+                                        Create New Task
                                     </div>
                                 </div>
 
@@ -126,17 +129,17 @@ const [head,setHead]=useState("Pending");
                             </div>
 
                             {/* Pending and Completed buttons */}
-                            <div style={{ height: '10vh' }} className="w-full    bg-purple-400 rounded-bl-2xl rounded-br-2xl flex items-center justify-between">
+                            <div style={{ height: '10vh' }} className="w-full      rounded-bl-2xl rounded-br-2xl flex items-center justify-between">
                                 {/* Pending button */}
-                                <div onClick={handlePending} className="bg-indigo-200 h-full text-black font-inter font-bold hover:bg-gray-400 delay-100 text-2xl t flex items-center justify-center h-full  w-1/2 rounded-bl-2xl"><div>Pending</div></div>
+                                <div style={{ background:  `${tab.a}` }} onClick={handlePending} className=" h-full text-black font-inter font-semibold hover:bg-gray-400 delay-100 text-2xl t flex items-center justify-center h-full  w-1/2 rounded-bl-2xl"><div>Pending</div></div>
 
                                 {/* Completed button */}
-                                <div onClick={handleComplete} className="bg-purple-50 bg-opacity-90 text-black font-inter hover:bg-gray-400 delay-100 font-bold text-2xl flex items-center justify-center h-full  w-1/2 ounded"><div>Completed</div></div>
+                                <div style={{ background:  `${tab.b}` }} onClick={handleComplete} className=" text-black font-inter hover:bg-gray-400 delay-100 font-semibold text-2xl flex items-center justify-center h-full  w-1/2 "><div>Completed</div></div>
                             </div>
                         </div>
 
                         {/* Task details (visible on larger screens) */}
-                        <div style={{ height: '80vh', background: "linear-gradient(180deg, rgba(213, 212, 255, 0.65) -1.73%, #F7F7FF 100%)" }} class="hidden lg:block rounded-tr-xl col-span-2 md:col-span-1 lg:w-1/2   p-4">
+                        <div style={{ height: '80vh', background: "linear-gradient(180deg, rgba(213, 212, 255, 0.65) -1.73%, #F7F7FF 100%)" }} class="hidden lg:block border-l border-solid border-gray-500 rounded-tr-xl col-span-2 md:col-span-1 lg:w-1/2   p-4">
                             <Detail task={task1} />
                         </div>
                     </div>
