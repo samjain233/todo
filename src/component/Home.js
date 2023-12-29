@@ -16,7 +16,7 @@ export const Home = () => {
     const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
 
     // State to manage task data
-    const [data, setData] = React.useState(data1);
+    const [data, setData] = React.useState(data1.filter(item => !item.isCompleted));
 
     // State for managing visibility of create task modal
     const [showCeate, setShowCreate] = React.useState(false);
@@ -76,7 +76,7 @@ export const Home = () => {
 
     // Function to handle displaying pending tasks
     function handlePending() {
-        setData(data1);
+        setData(data1.filter(item => !item.isCompleted));
         setHead("Pending Task");
         setTab({a:"#ACA7D5",b:"#F5F4FFE8"});
     }
