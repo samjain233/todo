@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "head": "Complete Project Proposal",
+      "description": "Write and submit the project proposal by the end of the week.",
+      "image": "project_proposal.png",
+      "startTime": "2023-01-01T09:00:00",
+      "endTime": "2023-01-01T17:00:00",
+      "isCompleted": false
+    },
+    {
+      "id": 2,
+      "head": "Meeting with Team",
+      "description": "Conduct a team meeting to discuss project progress and assign tasks.",
+      "image": "",
+      "startTime": "2023-01-02T14:30:00",
+      "endTime": "2023-01-02T16:00:00",
+      "isCompleted": false
+    },
+    {
+      "id": 3,
+      "head": "Prepare Presentation",
+      "description": "Create a presentation for the upcoming client meeting.",
+      "image": "presentation_slide.png",
+      "startTime": "2023-01-03T10:00:00",
+      "endTime": "2023-01-03T12:00:00",
+      "isCompleted": true
+    },
+    {
+      "id": 4,
+      "head": "Buy Groceries",
+      "description": "Pick up groceries for the week.",
+      "image": "",
+      "startTime": "2023-01-04T18:00:00",
+      "endTime": "2023-01-04T18:00:00",
+      "isCompleted": false
+    },
+    {
+      "id": 5,
+      "head": "Exercise",
+      "description": "Go for a 30-minute jog in the park.",
+      "image": "exercise.jpg",
+      "startTime": "2023-01-05T07:00:00",
+      "endTime": "2023-01-05T07:30:00",
+      "isCompleted": true
+    },
+    {
+      "id": 6,
+      "head": "Read Book",
+      "description": "Read the first chapter of the new novel.",
+      "image": "book_cover.jpg",
+      "startTime": "2023-01-06T20:00:00",
+      "endTime": "2023-01-06T21:00:00",
+      "isCompleted": false
+    }
+  ]
+  
