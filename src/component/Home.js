@@ -8,6 +8,7 @@ import data1 from '../data/data.json';
 import Delete from './Delete';
 import Task from './Task';
 import Topbar from './Topbar';
+import BottomTab from './BottomTab';
 
 // Functional component named Home
 export const Home = () => {
@@ -129,13 +130,7 @@ export const Home = () => {
                             </div>
 
                             {/* Pending and Completed buttons */}
-                            <div style={{ height: '10vh' }} className="w-full      rounded-bl-2xl rounded-br-2xl flex items-center justify-between">
-                                {/* Pending button */}
-                                <div style={{ background:  `${tab.a}` }} onClick={handlePending} className=" h-full text-black font-inter font-semibold hover:bg-gray-400 delay-100 text-2xl t flex items-center justify-center h-full  w-1/2 rounded-bl-2xl"><div>Pending</div></div>
-
-                                {/* Completed button */}
-                                <div style={{ background:  `${tab.b}` }} onClick={handleComplete} className=" text-black font-inter hover:bg-gray-400 delay-100 font-semibold text-2xl flex items-center justify-center h-full  w-1/2 "><div>Completed</div></div>
-                            </div>
+                          <BottomTab tab={tab} handleComplete={handleComplete} handlePending={handlePending}/>
                         </div>
 
                         {/* Task details (visible on larger screens) */}
