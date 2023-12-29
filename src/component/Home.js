@@ -136,7 +136,7 @@ export const Home = () => {
                 {data.map((item) => {
                   return (
                     <>
-                      <Task task={item} />
+                      <Task item={item} showDetails={showDetails} handleDelete={handleDelete} />
                     </>
                   );
                 })}
