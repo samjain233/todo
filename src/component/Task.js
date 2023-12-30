@@ -27,7 +27,7 @@ const Task = ({item,handleDelete,showDetails,handleCompleteTask}) => {
           onClick={() => showDetails(item)}
           className="w-full p-4 m-1 bg-white  rounded-2xl hover:border hover:bg-gray-200  hover:border-indigo-900  hover:border-2 flex delay-100 items-center justify-between"
         >
-          <span className="text-gray-800">{item.head}</span>
+          <span className="text-gray-800  break-all">{item.head}</span>
           <div className="flex">
             <button
               onClick={(event)=>handleDelete(event,item)}
