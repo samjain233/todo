@@ -210,7 +210,7 @@ useEffect(() => {
             {/* Task details (visible on larger screens) */}
             <div className="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
               <div className="text-left text-[30px] p-2 font-[700]">
-                Description
+                {task1.head?"Description":"No Task Selected"}
               </div>
               <div className="h-[90%] overflow-auto">
                 <div className="text-[20px] p-2 font-[600] text-left">
