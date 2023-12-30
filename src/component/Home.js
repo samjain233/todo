@@ -104,11 +104,11 @@ export const Home = () => {
 
       {/* Task list and details */}
       <div style={{ height: "50vh" }} className="flex justify-center ">
-        <div class="md:p-8 grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
+        <div className="md:p-8 grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
           {/* Task List */}
           <div
             style={{ height: "70vh" }}
-            class="col-span-2 flex rounded-xl w-full  md:col-span-1 bg-purple-200"
+            className="col-span-2 flex rounded-xl w-full  md:col-span-1 bg-purple-200"
           >
             <div className="w-full">
               <div
@@ -151,7 +151,7 @@ export const Home = () => {
             </div>
 
             {/* Task details (visible on larger screens) */}
-            <div class="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
+            <div className="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
               <div className="text-left text-[30px] p-2 font-[700]">
                 Description
               </div>
