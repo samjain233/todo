@@ -1,7 +1,7 @@
 import React from 'react'
 import Create from './Create';
 
-const Topbar = () => {
+const Topbar = ({addTask}) => {
    // State for managing visibility of create task modal
    const [showCreate, setShowCreate] = React.useState(false);
 
@@ -27,12 +27,12 @@ const Topbar = () => {
       </div>
 
       {/* Create New Task button (visible on mobile and hidden on larger screens) */}
-      <div onClick={createTask} className="bg-blue-900 flex-col hover:bg-blue-500 flex justify-center  md:hidden lg:block lg:mx-2 h-10 rounded-xl item-center p-2 text-white rounded  items-center">
+      <div onClick={createTask} className="bg-blue-900 flex-col hover:bg-blue-500 flex justify-center  md:hidden lg:block lg:mx-2 h-10 rounded-xl item-center p-2 text-white rounded  items-center cursor-pointer">
         Create new task
       </div>
     </div>
     {/* Conditionally render the Create component based on showCreate state */}
-    {showCreate && <Create setShowCreate={setShowCreate} />}
+    {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
     </div>
   )
 }

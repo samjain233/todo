@@ -47,7 +47,7 @@ const Detail = (props) => {
                     {task.description}
                   </div>
                   <img
-                    src="https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600"
+                    src={task.img}
                     alt="task-preview"
                   ></img>
                 </div>

@@ -13,7 +13,7 @@ import BottomTab from "./BottomTab";
 // Functional component named Home
 export const Home = () => {
   // State to track whether the window width is greater than 768 pixels
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
 
   // State to manage task data
   const [data, setData] = React.useState(
@@ -21,7 +21,7 @@ export const Home = () => {
   );
 
   // State for managing visibility of create task modal
-  const [showCeate, setShowCreate] = React.useState(false);
+  const [showCreate, setShowCreate] = React.useState(false);
 
   // State for managing visibility of task detail modal
   const [showDetail, setShowDetail] = React.useState(false);
@@ -33,7 +33,7 @@ export const Home = () => {
   const [tab, setTab] = useState({ a: "#ACA7D5", b: "#F5F4FFE8" });
   // Function to handle window resize and update isDesktop state
   const handleResize = () => {
-    setIsDesktop(window.innerWidth > 1080);
+    setIsDesktop(window.innerWidth > 1024);
   };
 
   // Effect hook to add and remove resize event listener
@@ -56,7 +56,7 @@ export const Home = () => {
 
   // Function to toggle the visibility of create task modal
   function createTask() {
-    setShowCreate(!showCeate);
+    setShowCreate(!showCreate);
     console.log(isDesktop);
   }
 
@@ -67,6 +67,12 @@ export const Home = () => {
 
     setTask1(item);
   }
+
+  // Function to add a new task
+  const addTask = (newTask) => {
+    setData([...data, newTask]);
+  };
+
 
   // Function to handle completion of tasks
   function handleComplete() {
@@ -111,7 +117,7 @@ const handleDeleteTask = () => {
 
       {/* Sort and create task buttons */}
       <div className="p-4 md:p-8 w-full flex flex-col md:flex-row justify-center mb-2">
-        <Topbar />
+        <Topbar addTask={addTask}/>
       </div>
 
       {/* Task list and details */}
@@ -148,7 +154,7 @@ const handleDeleteTask = () => {
                 {data.map((item) => {
                   return (
                     <>
-                      <Task item={item} showDetails={showDetails} handleDelete={handleDelete} />
+                      <Task key={item.id} item={item} showDetails={showDetails} handleDelete={handleDelete} />
                     </>
                   );
                 })}
@@ -177,18 +183,19 @@ const handleDeleteTask = () => {
                 <div className="text-[18px] p-2 font-[400] text-left">
                   {task1.description}
                 </div>
-                <img
-                  src="https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600"
+                {task1.image && <img
+                  src={task1.image}
                   alt="task-preview"
-                ></img>
+                ></img>}
               </div>
             </div>
           </div>
         </div>
       </div>
 
+
       {/* Modal components */}
-      {showCeate && <Create set={setShowCreate} />}
+      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
       {showDetail && <Detail set={setShowDetail} task={task1} />}
       {confirm && <Delete set={setConfirm} task={task1} handleDeleteTask={handleDeleteTask} />}
     </>

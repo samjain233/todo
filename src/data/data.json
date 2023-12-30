@@ -3,7 +3,7 @@
       "id": 1,
       "head": "Complete Project Proposal",
       "description": "Write and submit the project proposal by the end of the week.",
-      "image": "project_proposal.png",
+      "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-01T09:00:00",
       "endTime": "2023-01-01T17:00:00",
       "isCompleted": false
@@ -21,7 +21,7 @@
       "id": 3,
       "head": "Prepare Presentation",
       "description": "Create a presentation for the upcoming client meeting.",
-      "image": "presentation_slide.png",
+      "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-03T10:00:00",
       "endTime": "2023-01-03T12:00:00",
       "isCompleted": true
@@ -39,7 +39,7 @@
       "id": 5,
       "head": "Exercise",
       "description": "Go for a 30-minute jog in the park.",
-      "image": "exercise.jpg",
+      "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-05T07:00:00",
       "endTime": "2023-01-05T07:30:00",
       "isCompleted": true
@@ -48,7 +48,7 @@
       "id": 6,
       "head": "Read Book",
       "description": "Read the first chapter of the new novel.",
-      "image": "book_cover.jpg",
+      "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-06T20:00:00",
       "endTime": "2023-01-06T21:00:00",
       "isCompleted": false
