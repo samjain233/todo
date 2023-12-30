@@ -89,22 +89,30 @@ export const Home = () => {
   }
 
   // Function to handle task deletion
-  function handleDelete(e) {
+  function handleDelete(e,item) {
+    setTask1(item);
     setConfirm(!confirm);
     e.stopPropagation();
-    console.log("raman");
   }
 
   // Inside the Home component
 const handleDeleteTask = () => {
-  // Implement the logic to remove the task from the data state
-  // You can use the current task's id or any unique identifier to filter it out
+
+  // Filter out the task with the specific ID from the data state
   const updatedData = data.filter((item) => item.id !== task1.id);
   setData(updatedData);
 
   // Close the delete popup
   setConfirm(false);
+  setTask1({
+    Head: "",
+    description: "",
+    image: "",
+    startTime: "",
+    endTime: "",
+  })
 };
+
 
 
   // JSX rendering for the Home component
@@ -117,7 +125,7 @@ const handleDeleteTask = () => {
 
       {/* Sort and create task buttons */}
       <div className="flex justify-center">
-      <div className="w-full flex flex-col md:flex-row justify-end w-3/4">
+      <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
         <Topbar addTask={addTask}/>
       </div>
       </div>
@@ -177,7 +185,7 @@ const handleDeleteTask = () => {
               </div>
               <div className="h-[90%] overflow-auto">
                 <div className="text-[20px] p-2 font-[600] text-left">
-                  {task1.Head}
+                  {task1.head}
                 </div>
                 <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
                   {task1.endTime}

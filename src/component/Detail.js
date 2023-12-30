@@ -46,10 +46,10 @@ const Detail = (props) => {
                   <div className="text-[18px] p-2 font-[400] text-lef">
                     {task.description}
                   </div>
-                  <img
-                    src={task.img}
+                  {task.image &&<img
+                    src={task.image}
                     alt="task-preview"
-                  ></img>
+                  ></img>}
                 </div>
               </>
             )}
