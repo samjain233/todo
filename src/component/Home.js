@@ -89,6 +89,18 @@ export const Home = () => {
     console.log("raman");
   }
 
+  // Inside the Home component
+const handleDeleteTask = () => {
+  // Implement the logic to remove the task from the data state
+  // You can use the current task's id or any unique identifier to filter it out
+  const updatedData = data.filter((item) => item.id !== task1.id);
+  setData(updatedData);
+
+  // Close the delete popup
+  setConfirm(false);
+};
+
+
   // JSX rendering for the Home component
   return (
     <>
@@ -178,7 +190,7 @@ export const Home = () => {
       {/* Modal components */}
       {showCeate && <Create set={setShowCreate} />}
       {showDetail && <Detail set={setShowDetail} task={task1} />}
-      {confirm && <Delete set={setConfirm} />}
+      {confirm && <Delete set={setConfirm} task={task1} handleDeleteTask={handleDeleteTask} />}
     </>
   );
 };
