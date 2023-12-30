@@ -37,13 +37,13 @@ const Detail = (props) => {
                   Description
                 </div>
                 <div className="lg:h-[325px] md:h-[400px] h-[400px] overflow-auto">
-                  <div className="text-[20px] p-2 font-[600] text-left">
+                  <div className="text-[20px] p-2 font-[600] text-left  break-all">
                     {task.head}
                   </div>
                   <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
                     {task.endTime}
                   </div>
-                  <div className="text-[18px] p-2 font-[400] text-lef">
+                  <div className="text-[18px] p-2 font-[400] text-lef  break-all">
                     {task.description}
                   </div>
                   {task.image &&<img
