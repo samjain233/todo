@@ -153,7 +153,7 @@ useEffect(() => {
       </div>
 
       {/* Sort and create task buttons */}
-      <div className="flex justify-center">
+      <div className="flex justify-center  md:px-16">
       <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
         <Topbar addTask={addTask}/>
       </div>
@@ -161,7 +161,7 @@ useEffect(() => {
 
       {/* Task list and details */}
       <div style={{ height: "50vh" }} className="flex justify-center ">
-        <div className=" grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
+        <div className=" grid w-full md:w-full md:px-16  lg:w-3/4 sm:w-full grid-cols-1 ">
           {/* Task List */}
           <div
             style={{ height: "70vh" }}
