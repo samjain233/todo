@@ -29,7 +29,7 @@ const Topbar = ({ addTask }) => {
         </div>
 
         {/* Create New Task button (visible on mobile and hidden on larger screens) */}
-        <div onClick={createTask} className="bg-blue-900 flex-col hover:bg-blue-500 flex justify-center md:hidden lg:block lg:mx-2 h-10 rounded-xl item-center p-2 text-white rounded items-center cursor-pointer w-full">
+        <div onClick={createTask} style={{ background: "#3D00C0" }} className=" flex-col hover:bg-blue-500 flex justify-center md:hidden lg:block lg:mx-2 h-10 rounded-xl item-center p-2 text-white rounded items-center cursor-pointer w-full">
           Create new task
         </div>
       </div>
