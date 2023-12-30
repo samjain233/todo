@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // Importing components from local files
 import Create from "./Create";
 import Detail from "./Detail";
-import data1 from "../data/data.json";
+import tasks from "../data/data.json";
 import Delete from "./Delete";
 import Task from "./Task";
 import Topbar from "./Topbar";
@@ -13,15 +13,15 @@ import BottomTab from "./BottomTab";
 // Functional component named Home
 export const Home = () => {
   // State to track whether the window width is greater than 768 pixels
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
-
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
   // State to manage task data
+  const [data1,setData1] = React.useState(tasks)
   const [data, setData] = React.useState(
     data1.filter((item) => !item.isCompleted)
   );
 
   // State for managing visibility of create task modal
-  const [showCeate, setShowCreate] = React.useState(false);
+  const [showCreate, setShowCreate] = React.useState(false);
 
   // State for managing visibility of task detail modal
   const [showDetail, setShowDetail] = React.useState(false);
@@ -33,7 +33,7 @@ export const Home = () => {
   const [tab, setTab] = useState({ a: "#ACA7D5", b: "#F5F4FFE8" });
   // Function to handle window resize and update isDesktop state
   const handleResize = () => {
-    setIsDesktop(window.innerWidth > 1080);
+    setIsDesktop(window.innerWidth > 1024);
   };
 
   // Effect hook to add and remove resize event listener
@@ -52,11 +52,12 @@ export const Home = () => {
     image: "",
     startTime: "",
     endTime: "",
+    isCompleted:"",
   });
 
   // Function to toggle the visibility of create task modal
   function createTask() {
-    setShowCreate(!showCeate);
+    setShowCreate(!showCreate);
     console.log(isDesktop);
   }
 
@@ -67,6 +68,12 @@ export const Home = () => {
 
     setTask1(item);
   }
+
+  // Function to add a new task
+  const addTask = (newTask) => {
+    setData1([...data1, newTask]);
+  };
+
 
   // Function to handle completion of tasks
   function handleComplete() {
@@ -83,22 +90,58 @@ export const Home = () => {
   }
 
   // Function to handle task deletion
-  function handleDelete(e) {
+  function handleDelete(e,item) {
+    setTask1(item);
     setConfirm(!confirm);
     e.stopPropagation();
-    console.log("raman");
   }
 
   // Inside the Home component
 const handleDeleteTask = () => {
-  // Implement the logic to remove the task from the data state
-  // You can use the current task's id or any unique identifier to filter it out
-  const updatedData = data.filter((item) => item.id !== task1.id);
-  setData(updatedData);
+
+  // Filter out the task with the specific ID from the data state
+  const updatedData = data1.filter((item) => item.id !== task1.id);
+  setData1(updatedData);
 
   // Close the delete popup
   setConfirm(false);
+  setTask1({
+    Head: "",
+    description: "",
+    image: "",
+    startTime: "",
+    endTime: "",
+    isCompleted: "",
+  })
 };
+
+const handleCompleteTask = (e, item) => {
+  setTask1(item);
+  e.stopPropagation();
+  
+  // Find the task to mark as complete by its ID
+  const updatedData = data1.map(task => {
+    if (task.id === item.id) {
+      // Set isCompleted to true for the specific task
+      return { ...task, isCompleted: true };
+    }
+    return task;
+  });
+
+  // Update the data state to reflect the modified task
+  setData1(updatedData);
+};
+
+useEffect(() => {
+  // Update the 'data' state based on the 'data1' state
+  if(head === 'Pending Task'){
+  setData(data1.filter((item) => !item.isCompleted));
+  }
+  else{
+    setData(data1.filter((item) => item.isCompleted));
+  }
+}, [data1]);
+
 
 
   // JSX rendering for the Home component
@@ -110,17 +153,19 @@ const handleDeleteTask = () => {
       </div>
 
       {/* Sort and create task buttons */}
-      <div className="p-4 md:p-8 w-full flex flex-col md:flex-row justify-center mb-2">
-        <Topbar />
+      <div className="flex justify-center">
+      <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
+        <Topbar addTask={addTask}/>
+      </div>
       </div>
 
       {/* Task list and details */}
       <div style={{ height: "50vh" }} className="flex justify-center ">
-        <div class="md:p-8 grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
+        <div className=" grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
           {/* Task List */}
           <div
             style={{ height: "70vh" }}
-            class="col-span-2 flex rounded-xl w-full  md:col-span-1 bg-purple-200"
+            className="col-span-2 flex rounded-xl w-full  md:col-span-1 bg-purple-200"
           >
             <div className="w-full">
               <div
@@ -148,7 +193,7 @@ const handleDeleteTask = () => {
                 {data.map((item) => {
                   return (
                     <>
-                      <Task item={item} showDetails={showDetails} handleDelete={handleDelete} />
+                      <Task key={item.id} item={item} showDetails={showDetails} handleDelete={handleDelete} handleCompleteTask={handleCompleteTask} />
                     </>
                   );
                 })}
@@ -163,13 +208,13 @@ const handleDeleteTask = () => {
             </div>
 
             {/* Task details (visible on larger screens) */}
-            <div class="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
+            <div className="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
               <div className="text-left text-[30px] p-2 font-[700]">
                 Description
               </div>
               <div className="h-[90%] overflow-auto">
                 <div className="text-[20px] p-2 font-[600] text-left">
-                  {task1.Head}
+                  {task1.head}
                 </div>
                 <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
                   {task1.endTime}
@@ -177,18 +222,19 @@ const handleDeleteTask = () => {
                 <div className="text-[18px] p-2 font-[400] text-left">
                   {task1.description}
                 </div>
-                <img
-                  src="https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600"
+                {task1.image && <img
+                  src={task1.image}
                   alt="task-preview"
-                ></img>
+                ></img>}
               </div>
             </div>
           </div>
         </div>
       </div>
 
+
       {/* Modal components */}
-      {showCeate && <Create set={setShowCreate} />}
+      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
       {showDetail && <Detail set={setShowDetail} task={task1} />}
       {confirm && <Delete set={setConfirm} task={task1} handleDeleteTask={handleDeleteTask} />}
     </>
