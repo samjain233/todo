@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // Importing components from local files
 import Create from "./Create";
 import Detail from "./Detail";
-import data1 from "../data/data.json";
+import tasks from "../data/data.json";
 import Delete from "./Delete";
 import Task from "./Task";
 import Topbar from "./Topbar";
@@ -14,8 +14,8 @@ import BottomTab from "./BottomTab";
 export const Home = () => {
   // State to track whether the window width is greater than 768 pixels
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
-
   // State to manage task data
+  const [data1,setData1] = React.useState(tasks)
   const [data, setData] = React.useState(
     data1.filter((item) => !item.isCompleted)
   );
@@ -52,6 +52,7 @@ export const Home = () => {
     image: "",
     startTime: "",
     endTime: "",
+    isCompleted:"",
   });
 
   // Function to toggle the visibility of create task modal
@@ -70,7 +71,7 @@ export const Home = () => {
 
   // Function to add a new task
   const addTask = (newTask) => {
-    setData([...data, newTask]);
+    setData1([...data1, newTask]);
   };
 
 
@@ -99,8 +100,8 @@ export const Home = () => {
 const handleDeleteTask = () => {
 
   // Filter out the task with the specific ID from the data state
-  const updatedData = data.filter((item) => item.id !== task1.id);
-  setData(updatedData);
+  const updatedData = data1.filter((item) => item.id !== task1.id);
+  setData1(updatedData);
 
   // Close the delete popup
   setConfirm(false);
@@ -110,8 +111,36 @@ const handleDeleteTask = () => {
     image: "",
     startTime: "",
     endTime: "",
+    isCompleted: "",
   })
 };
+
+const handleCompleteTask = (e, item) => {
+  setTask1(item);
+  e.stopPropagation();
+  
+  // Find the task to mark as complete by its ID
+  const updatedData = data1.map(task => {
+    if (task.id === item.id) {
+      // Set isCompleted to true for the specific task
+      return { ...task, isCompleted: true };
+    }
+    return task;
+  });
+
+  // Update the data state to reflect the modified task
+  setData1(updatedData);
+};
+
+useEffect(() => {
+  // Update the 'data' state based on the 'data1' state
+  if(head === 'Pending Task'){
+  setData(data1.filter((item) => !item.isCompleted));
+  }
+  else{
+    setData(data1.filter((item) => item.isCompleted));
+  }
+}, [data1]);
 
 
 
@@ -164,7 +193,7 @@ const handleDeleteTask = () => {
                 {data.map((item) => {
                   return (
                     <>
-                      <Task key={item.id} item={item} showDetails={showDetails} handleDelete={handleDelete} />
+                      <Task key={item.id} item={item} showDetails={showDetails} handleDelete={handleDelete} handleCompleteTask={handleCompleteTask} />
                     </>
                   );
                 })}

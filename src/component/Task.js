@@ -1,6 +1,6 @@
 import React from "react";
 
-const Task = ({item,handleDelete,showDetails}) => {
+const Task = ({item,handleDelete,showDetails,handleCompleteTask}) => {
   return (
     <>
       {item.isCompleted ? (
@@ -35,7 +35,9 @@ const Task = ({item,handleDelete,showDetails}) => {
             >
               Delete
             </button>
-            <button className="bg-lime-200 text-green-800 py-1 px-3 m-1 rounded">
+            <button 
+            className="bg-lime-200 text-green-800 py-1 px-3 m-1 rounded "
+            onClick={(event)=>handleCompleteTask(event,item)}>
               Complete
             </button>
           </div>

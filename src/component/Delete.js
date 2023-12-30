@@ -18,8 +18,8 @@ const Delete = (props) => {
     };
     
     
-    const task = props.task
-    return (
+    
+  return (
         <>
             {isOpen && (
                 <div data-aos="flip-right" className="bg-opacity-30 backdrop-blur-md p-4 rounded-lg bg-gray-200 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-80">
