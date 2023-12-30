@@ -116,13 +116,15 @@ const handleDeleteTask = () => {
       </div>
 
       {/* Sort and create task buttons */}
-      <div className="p-4 md:p-8 w-full flex flex-col md:flex-row justify-center mb-2">
+      <div className="flex justify-center">
+      <div className="w-full flex flex-col md:flex-row justify-end w-3/4">
         <Topbar addTask={addTask}/>
+      </div>
       </div>
 
       {/* Task list and details */}
       <div style={{ height: "50vh" }} className="flex justify-center ">
-        <div className="md:p-8 grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
+        <div className=" grid w-full md:w-full lg:w-3/4 sm:w-full grid-cols-1 ">
           {/* Task List */}
           <div
             style={{ height: "70vh" }}
