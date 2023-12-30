@@ -15,7 +15,7 @@ export const Home = () => {
   // State to track whether the window width is greater than 768 pixels
   const [isDesktop, setIsDesktop] = useState(window.innerWidth > 1024);
   // State to manage task data
-  const [data1,setData1] = React.useState(tasks)
+  const [data1, setData1] = React.useState(tasks);
   const [data, setData] = React.useState(
     data1.filter((item) => !item.isCompleted)
   );
@@ -44,7 +44,26 @@ export const Home = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
+  // Sorting function added for managing sorting request
+  const handleSort = (sortOption) => {
+    console.log("I am being called bro");
+    if (sortOption === "dateCreated") {
+      setData1(
+        [...data1].sort((a, b) => new Date(a.startTime) - new Date(b.startTime))
+      );
+    }
+    if (sortOption === "dueDate") {
+      setData1(
+        [...data1].sort((a, b) => new Date(a.endTime) - new Date(b.endTime))
+      );
+    }
+    // Update the 'data' state based on the 'data1' state
+    if (head === "Pending Task") {
+      setData(data1.filter((item) => !item.isCompleted));
+    } else {
+      setData(data1.filter((item) => item.isCompleted));
+    }
+  };
   // State to manage details of a specific task
   const [task1, setTask1] = useState({
     Head: "",
@@ -52,7 +71,7 @@ export const Home = () => {
     image: "",
     startTime: "",
     endTime: "",
-    isCompleted:"",
+    isCompleted: "",
   });
 
   // Function to toggle the visibility of create task modal
@@ -74,7 +93,6 @@ export const Home = () => {
     setData1([...data1, newTask]);
   };
 
-
   // Function to handle completion of tasks
   function handleComplete() {
     setData(data1.filter((item) => item.isCompleted));
@@ -90,59 +108,55 @@ export const Home = () => {
   }
 
   // Function to handle task deletion
-  function handleDelete(e,item) {
+  function handleDelete(e, item) {
     setTask1(item);
     setConfirm(!confirm);
     e.stopPropagation();
   }
 
   // Inside the Home component
-const handleDeleteTask = () => {
+  const handleDeleteTask = () => {
+    // Filter out the task with the specific ID from the data state
+    const updatedData = data1.filter((item) => item.id !== task1.id);
+    setData1(updatedData);
 
-  // Filter out the task with the specific ID from the data state
-  const updatedData = data1.filter((item) => item.id !== task1.id);
-  setData1(updatedData);
+    // Close the delete popup
+    setConfirm(false);
+    setTask1({
+      Head: "",
+      description: "",
+      image: "",
+      startTime: "",
+      endTime: "",
+      isCompleted: "",
+    });
+  };
 
-  // Close the delete popup
-  setConfirm(false);
-  setTask1({
-    Head: "",
-    description: "",
-    image: "",
-    startTime: "",
-    endTime: "",
-    isCompleted: "",
-  })
-};
+  const handleCompleteTask = (e, item) => {
+    setTask1(item);
+    e.stopPropagation();
 
-const handleCompleteTask = (e, item) => {
-  setTask1(item);
-  e.stopPropagation();
-  
-  // Find the task to mark as complete by its ID
-  const updatedData = data1.map(task => {
-    if (task.id === item.id) {
-      // Set isCompleted to true for the specific task
-      return { ...task, isCompleted: true };
+    // Find the task to mark as complete by its ID
+    const updatedData = data1.map((task) => {
+      if (task.id === item.id) {
+        // Set isCompleted to true for the specific task
+        return { ...task, isCompleted: true };
+      }
+      return task;
+    });
+
+    // Update the data state to reflect the modified task
+    setData1(updatedData);
+  };
+
+  useEffect(() => {
+    // Update the 'data' state based on the 'data1' state
+    if (head === "Pending Task") {
+      setData(data1.filter((item) => !item.isCompleted));
+    } else {
+      setData(data1.filter((item) => item.isCompleted));
     }
-    return task;
-  });
-
-  // Update the data state to reflect the modified task
-  setData1(updatedData);
-};
-
-useEffect(() => {
-  // Update the 'data' state based on the 'data1' state
-  if(head === 'Pending Task'){
-  setData(data1.filter((item) => !item.isCompleted));
-  }
-  else{
-    setData(data1.filter((item) => item.isCompleted));
-  }
-}, [data1]);
-
-
+  }, [data1]);
 
   // JSX rendering for the Home component
   return (
@@ -153,10 +167,10 @@ useEffect(() => {
       </div>
 
       {/* Sort and create task buttons */}
-      <div className="flex justify-center  md:px-16">
-      <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
-        <Topbar addTask={addTask}/>
-      </div>
+      <div className="flex justify-center">
+        <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
+          <Topbar addTask={addTask} handleSort={handleSort} />
+        </div>
       </div>
 
       {/* Task list and details */}
@@ -193,7 +207,13 @@ useEffect(() => {
                 {data.map((item) => {
                   return (
                     <>
-                      <Task key={item.id} item={item} showDetails={showDetails} handleDelete={handleDelete} handleCompleteTask={handleCompleteTask} />
+                      <Task
+                        key={item.id}
+                        item={item}
+                        showDetails={showDetails}
+                        handleDelete={handleDelete}
+                        handleCompleteTask={handleCompleteTask}
+                      />
                     </>
                   );
                 })}
@@ -210,7 +230,7 @@ useEffect(() => {
             {/* Task details (visible on larger screens) */}
             <div className="border-l-2 rounded-r-xl border-black hidden lg:block h-[80vh] bg-gradient-to-b from-[#D5D4FFA6] to-[#F7F7FF] col-span-2 md:col-span-1 lg:w-1/2   p-4">
               <div className="text-left text-[30px] p-2 font-[700]">
-                {task1.head?"Description":"No Task Selected"}
+                {task1.head ? "Description" : "No Task Selected"}
               </div>
               <div className="h-[90%] overflow-auto">
                 <div className="text-[20px] p-2 font-[600] text-left">
@@ -222,21 +242,25 @@ useEffect(() => {
                 <div className="text-[18px] p-2 font-[400] text-left">
                   {task1.description}
                 </div>
-                {task1.image && <img
-                  src={task1.image}
-                  alt="task-preview"
-                ></img>}
+                {task1.image && (
+                  <img src={task1.image} alt="task-preview"></img>
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
 
-
       {/* Modal components */}
       {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
       {showDetail && <Detail set={setShowDetail} task={task1} />}
-      {confirm && <Delete set={setConfirm} task={task1} handleDeleteTask={handleDeleteTask} />}
+      {confirm && (
+        <Delete
+          set={setConfirm}
+          task={task1}
+          handleDeleteTask={handleDeleteTask}
+        />
+      )}
     </>
   );
 };
