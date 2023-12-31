@@ -66,6 +66,7 @@ export const Home = () => {
   };
   // State to manage details of a specific task
   const [task1, setTask1] = useState({
+    id:"",
     Head: "",
     description: "",
     image: "",
@@ -125,6 +126,7 @@ export const Home = () => {
     setConfirm(false);
     if (task1.id === deletedTask.id) {
       setTask1({
+        id:"",
         Head: "",
         description: "",
         image: "",
@@ -151,6 +153,7 @@ export const Home = () => {
     setData1(updatedData);
     if (item.id === task1.id) {
       setTask1({
+        id:"",
         Head: "",
         description: "",
         image: "",
@@ -244,6 +247,7 @@ export const Home = () => {
                         showDetails={showDetails}
                         handleDelete={handleDelete}
                         handleCompleteTask={handleCompleteTask}
+                        selectedTask={task1}
                       />
                     </>
                   );
