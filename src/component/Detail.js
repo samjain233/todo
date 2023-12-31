@@ -41,7 +41,7 @@ const Detail = (props) => {
                     {task.head}
                   </div>
                   <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
-                    {task.endTime}
+                    {task.endTime && ('Due : '+props.formatDate(task.endTime))}
                   </div>
                   <div className="text-[18px] p-2 font-[400] text-lef  break-all">
                     {task.description}

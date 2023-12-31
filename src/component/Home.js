@@ -107,9 +107,10 @@ export const Home = () => {
     setTab({ a: "#ACA7D5", b: "#F5F4FFE8" });
   }
 
+  const [deletedTask, setDeletedTask] = React.useState();
   // Function to handle task deletion
   function handleDelete(e, item) {
-    setTask1(item);
+    setDeletedTask(item);
     setConfirm(!confirm);
     e.stopPropagation();
   }
@@ -117,23 +118,24 @@ export const Home = () => {
   // Inside the Home component
   const handleDeleteTask = () => {
     // Filter out the task with the specific ID from the data state
-    const updatedData = data1.filter((item) => item.id !== task1.id);
+    const updatedData = data1.filter((item) => item.id !== deletedTask.id);
     setData1(updatedData);
 
     // Close the delete popup
     setConfirm(false);
-    setTask1({
-      Head: "",
-      description: "",
-      image: "",
-      startTime: "",
-      endTime: "",
-      isCompleted: "",
-    });
+    if (task1.id === deletedTask.id) {
+      setTask1({
+        Head: "",
+        description: "",
+        image: "",
+        startTime: "",
+        endTime: "",
+        isCompleted: "",
+      });
+    }
   };
 
   const handleCompleteTask = (e, item) => {
-    setTask1(item);
     e.stopPropagation();
 
     // Find the task to mark as complete by its ID
@@ -147,6 +149,33 @@ export const Home = () => {
 
     // Update the data state to reflect the modified task
     setData1(updatedData);
+    if (item.id === task1.id) {
+      setTask1({
+        Head: "",
+        description: "",
+        image: "",
+        startTime: "",
+        endTime: "",
+        isCompleted: "",
+      });
+    }
+  };
+
+  // Function to format date in DD-MM-YYYY format
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    let month = `${d.getMonth() + 1}`;
+    let day = `${d.getDate()}`;
+
+    if (month.length < 2) {
+      month = `0${month}`;
+    }
+    if (day.length < 2) {
+      day = `0${day}`;
+    }
+
+    return `${day}-${month}-${year}`;
   };
 
   useEffect(() => {
@@ -168,14 +197,14 @@ export const Home = () => {
 
       {/* Sort and create task buttons */}
       <div className="flex justify-center">
-        <div className="w-full lg:w-3/4 flex flex-col md:flex-row justify-end">
-          <Topbar addTask={addTask} handleSort={handleSort} />
+        <div className="w-full lg:w-11/12 flex flex-col md:flex-row justify-end md:pr-16">
+          <Topbar addTask={addTask} handleSort={handleSort} formatDate={formatDate} />
         </div>
       </div>
 
       {/* Task list and details */}
       <div style={{ height: "50vh" }} className="flex justify-center ">
-        <div className=" grid w-full md:w-full md:px-16  lg:w-3/4 sm:w-full grid-cols-1 ">
+        <div className=" grid w-full md:w-full md:px-16  lg:w-11/12 sm:w-full grid-cols-1 ">
           {/* Task List */}
           <div
             style={{ height: "70vh" }}
@@ -237,7 +266,7 @@ export const Home = () => {
                   {task1.head}
                 </div>
                 <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
-                  {task1.endTime}
+                  {task1.endTime && ('Due : ' + formatDate(task1.endTime))}
                 </div>
                 <div className="text-[18px] p-2 font-[400] text-left">
                   {task1.description}
@@ -252,8 +281,8 @@ export const Home = () => {
       </div>
 
       {/* Modal components */}
-      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
-      {showDetail && <Detail set={setShowDetail} task={task1} />}
+      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} formatDate={formatDate} />}
+      {showDetail && <Detail set={setShowDetail} task={task1} formatDate={formatDate} />}
       {confirm && (
         <Delete
           set={setConfirm}

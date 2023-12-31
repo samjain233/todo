@@ -25,10 +25,10 @@ const Task = ({item,handleDelete,showDetails,handleCompleteTask}) => {
         <div
           data-aos="flip-up"
           onClick={() => showDetails(item)}
-          className="w-full p-4 m-1 bg-white  rounded-2xl hover:border hover:bg-gray-200  hover:border-indigo-900  hover:border-2 flex delay-100 items-center justify-between"
+          className="w-full p-4 m-1 bg-white  rounded-2xl hover:border hover:bg-gray-200  hover:border-indigo-900  hover:border-2 flex delay-100 md:items-center justify-between"
         >
           <span className="text-gray-800  break-all">{item.head}</span>
-          <div className="flex">
+          <div className="flex md:flex-col lg:flex-row">
             <button
               onClick={(event)=>handleDelete(event,item)}
               className="bg-red-200 text-red-900 py-1 px-3 m-1 rounded"

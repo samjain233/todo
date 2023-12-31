@@ -5,7 +5,7 @@
       "description": "Write and submit the project proposal by the end of the week.",
       "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-01T09:00:00",
-      "endTime": "2023-01-01T17:00:00",
+      "endTime": "01-01-2024",
       "isCompleted": false
     },
     {
@@ -14,7 +14,7 @@
       "description": "Conduct a team meeting to discuss project progress and assign tasks.",
       "image": "",
       "startTime": "2023-01-08T14:30:00",
-      "endTime": "2023-01-02T16:00:00",
+      "endTime": "02-01-2024",
       "isCompleted": false
     },
     {
@@ -23,7 +23,7 @@
       "description": "Create a presentation for the upcoming client meeting.",
       "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-03T10:00:00",
-      "endTime": "2023-01-03T12:00:00",
+      "endTime": "03-01-2024",
       "isCompleted": true
     },
     {
@@ -32,7 +32,7 @@
       "description": "Pick up groceries for the week.",
       "image": "",
       "startTime": "2023-01-04T18:00:00",
-      "endTime": "2023-01-04T18:00:00",
+      "endTime": "02-01-2024",
       "isCompleted": false
     },
     {
@@ -41,7 +41,7 @@
       "description": "Go for a 30-minute jog in the park.",
       "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-05T07:00:00",
-      "endTime": "2023-01-05T07:30:00",
+      "endTime": "02-01-2024",
       "isCompleted": true
     },
     {
@@ -50,7 +50,7 @@
       "description": "Read the first chapter of the new novel.",
       "image": "https://images.pexels.com/photos/276267/pexels-photo-276267.jpeg?auto=compress&cs=tinysrgb&w=600",
       "startTime": "2023-01-06T20:00:00",
-      "endTime": "2023-01-06T21:00:00",
+      "endTime": "02-01-2024",
       "isCompleted": false
     }
   ]

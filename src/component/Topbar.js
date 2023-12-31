@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Create from "./Create";
 
-const Topbar = ({ addTask, handleSort }) => {
+const Topbar = ({ addTask, handleSort,formatDate }) => {
   const [showCreate, setShowCreate] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
 
@@ -29,7 +29,7 @@ const Topbar = ({ addTask, handleSort }) => {
 
           {/* Date Created button */}
           <div
-            className={`w-full md:w-40 flex flex-col font-600 text-[20px] md:rounded-none justify-center hover:bg-cyan-600 text-gray-900 font-bold rounded-tl-lg rounded-bl-lg lg:rounded-none  h-full ${
+            className={`w-full md:w-40 cursor-pointer flex flex-col font-600 text-[20px] md:rounded-none justify-center hover:bg-cyan-600 text-gray-900 font-bold rounded-tl-lg rounded-bl-lg lg:rounded-none  h-full ${
               selectedSort === "dateCreated" ? "bg-[#ACA7D5]" : ""
             }`}
             onClick={() => handleSortClick("dateCreated")}
@@ -39,7 +39,7 @@ const Topbar = ({ addTask, handleSort }) => {
 
           {/* Due Date button */}
           <div
-            className={`w-full md:w-40 flex-col h-full hover:bg-cyan-600 hover:h-full font-600 text-[20px] flex font-bold justify-center  rounded-br-lg rounded-tr-lg ${
+            className={`w-full md:w-40 cursor-pointer flex-col h-full hover:bg-cyan-600 hover:h-full font-600 text-[20px] flex font-bold justify-center  rounded-br-lg rounded-tr-lg ${
               selectedSort === "dueDate" ? "bg-[#ACA7D5]" : ""
             }`}
             onClick={() => handleSortClick("dueDate")}
@@ -52,14 +52,14 @@ const Topbar = ({ addTask, handleSort }) => {
         <div
           onClick={createTask}
           style={{ background: "#3D00C0" }}
-          className="flex-col hover:bg-blue-500 flex justify-center md:hidden lg:block lg:mx-2 h-10 rounded-xl item-center p-2 text-white rounded items-center cursor-pointer w-full"
+          className="flex-col hover:bg-blue-500 flex justify-center md:hidden lg:block lg:mx-2 h-12 rounded-xl item-center lg:pt-3 px-3 text-white rounded items-center cursor-pointer w-full mb-2"
         >
           Create new task
         </div>
       </div>
 
       {/* Conditionally render the Create component based on showCreate state */}
-      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} />}
+      {showCreate && <Create setShowCreate={setShowCreate} addTask={addTask} formatDate={formatDate}/>}
     </div>
   );
 };
