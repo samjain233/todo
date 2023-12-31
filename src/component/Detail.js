@@ -46,10 +46,9 @@ const Detail = (props) => {
                   <div className="text-[18px] p-2 font-[400] text-lef  break-all">
                     {task.description}
                   </div>
-                  {task.image &&<img
-                    src={task.image}
-                    alt="task-preview"
-                  ></img>}
+                  {task.image && (
+                    <img src={task.image} alt="task-preview"></img>
+                  )}
                 </div>
               </>
             )}

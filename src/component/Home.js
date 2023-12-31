@@ -191,8 +191,10 @@ export const Home = () => {
   return (
     <>
       {/* Header */}
-      <div className="text-indigo-800 font-inter text-5xl font-extrabold">
-        TO-DO LIST
+      <div className="flex justify-center items-center p-4 lg:justify-start lg:ml-20">
+        <div className="text-indigo-800 font-inter text-5xl font-extrabold">
+          TO-DO LIST
+        </div>
       </div>
 
       {/* Sort and create task buttons */}
