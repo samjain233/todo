@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Create = ({ setShowCreate, addTask }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [fileName, setFileName] = useState(null);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const [task, setTask] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     dueDate: new Date(),
     image: null,
   });
@@ -20,8 +20,15 @@ const Create = ({ setShowCreate, addTask }) => {
 
   const adjustFileName = (fileName) => {
     if (fileName.length > 15) {
-      const extension = fileName.split('.').pop();
-      const truncatedName = fileName.substring(0, 4) + '......' + fileName.substring(fileName.length - 5 - extension.length, fileName.length - extension.length) + extension;
+      const extension = fileName.split(".").pop();
+      const truncatedName =
+        fileName.substring(0, 4) +
+        "......" +
+        fileName.substring(
+          fileName.length - 5 - extension.length,
+          fileName.length - extension.length
+        ) +
+        extension;
       return truncatedName;
     }
     return fileName;
@@ -39,41 +46,42 @@ const Create = ({ setShowCreate, addTask }) => {
     }
   };
 
-
   const handleClose = () => {
-    setShowCreate(false)
+    setShowCreate(false);
   };
 
   const handleSave = () => {
-    const form = document.getElementById('taskForm');
+    const form = document.getElementById("taskForm");
 
     if (form.checkValidity()) {
       const newTask = {
         id: Date.now(),
-        head:task.title,
+        head: task.title,
         description: task.description,
         image: task.image,
         startTime: new Date().toString(),
         endTime: selectedDate.toString(),
-        isCompleted: false
+        isCompleted: false,
       };
       addTask(newTask); // This line might be causing the error
       handleClose();
     } else {
-      setErrorMessage('Please fill in all required fields.');
+      setErrorMessage("Please fill in all required fields.");
     }
   };
 
-
-
-
   return (
     <>
-      <div data-aos="flip-left" className="fixed top-0 left-0 w-full bg-opacity-30 backdrop-blur-md p-4 rounded-lg bg-gray-200 h-full flex items-center justify-center bg-gray-800 bg-opacity-80">
+      <div
+        data-aos="flip-left"
+        className="fixed top-0 left-0 w-full bg-opacity-30 backdrop-blur-md p-4 rounded-lg bg-gray-200 h-full flex items-center justify-center bg-gray-800 bg-opacity-80"
+      >
         <div className="bg-white  rounded-lg">
           <div className="w-full max-w-md mx-auto rounded-lg">
             <div className="bg-white p-4 rounded-lg shadow-md">
-              <h2 className="text-2xl text-left text-blue-800 font-bold mb-3">New Task</h2>
+              <h2 className="text-2xl text-left text-blue-800 font-bold mb-3">
+                New Task
+              </h2>
               <form id="taskForm">
                 <input
                   type="text"
@@ -84,17 +92,21 @@ const Create = ({ setShowCreate, addTask }) => {
                   required
                 />
                 <textarea
-
                   name="description"
                   placeholder="Description..."
-                  style={{ height: '30vh' }}
+                  style={{ height: "30vh" }}
                   className=" hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-800 hover:text-blue-800 w-full bg-purple1  p-2 mb-3 border rounded border-gray-300 rounded-xl"
                   onChange={handleInputChange}
                   required
                 />
                 <div className="flex h-10 bg-purple1 items-center justify-between mb-3 rounded-xl">
-                  <span className="p-3">Due on: {selectedDate ? selectedDate.toDateString() : ''}</span>
-                  <div className="bg-gray1 w-1/3 text-sm text-white  h-full overflow-hidden rounded-tr-xl flex justify-center items-center hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 hover:text-blue-800 rounded-br-xl cursor-pointer" onClick={() => document.getElementById('dueDate').click()}>
+                  <span className="p-3">
+                    Due on: {selectedDate ? selectedDate.toDateString() : ""}
+                  </span>
+                  <div
+                    className="bg-gray1 w-1/3 text-sm text-white  h-full overflow-hidden rounded-tr-xl flex justify-center items-center hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 hover:text-blue-800 rounded-br-xl cursor-pointer"
+                    onClick={() => document.getElementById("dueDate").click()}
+                  >
                     <DatePicker
                       id="dueDate"
                       selected={selectedDate}
@@ -103,7 +115,10 @@ const Create = ({ setShowCreate, addTask }) => {
                       minDate={new Date()}
                       className="hidden w-full h-full top-0 left-0"
                     />
-                    <label htmlFor="dueDate" className="block text-sm font-medium text-white cursor-pointer">
+                    <label
+                      htmlFor="dueDate"
+                      className="block text-sm font-medium text-white cursor-pointer"
+                    >
                       Change
                     </label>
                   </div>
@@ -118,8 +133,11 @@ const Create = ({ setShowCreate, addTask }) => {
                     className="hidden"
                     id="image-input"
                   />
-                  <label htmlFor="image-input" className="cursor-pointer flex justify-between items-center h-full w-full">
-                    <span className="p-3">{fileName || 'No image...'}</span>
+                  <label
+                    htmlFor="image-input"
+                    className="cursor-pointer flex justify-between items-center h-full w-full"
+                  >
+                    <span className="p-3">{fileName || "No image..."}</span>
                     <div className="bg-gray1 hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 hover:text-blue-800 w-1/3 text-sm text-white px-3 h-full py-1 rounded-tr-xl rounded-br-xl flex items-center justify-center">
                       Add Image
                     </div>
@@ -131,8 +149,11 @@ const Create = ({ setShowCreate, addTask }) => {
                 )}
               </form>
               <div className="flex items-center justify-between">
-                <div onClick={handleClose} className="h-12 w-full hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 px-3 py-1 rounded-lg cursor-pointer flex items-center justify-center">
-                  <div className='text-center'> Cancel</div>
+                <div
+                  onClick={handleClose}
+                  className="h-12 w-full hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 px-3 py-1 rounded-lg cursor-pointer flex items-center justify-center"
+                >
+                  <div className="text-center"> Cancel</div>
                 </div>
                 <div
                   className="bg-indigo-600 h-12 w-full hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 text-white px-3 py-1 rounded-lg cursor-pointer flex items-center justify-center"
