@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Create = ({ setShowCreate, addTask }) => {
+const Create = ({ setShowCreate, addTask, formatDate }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [fileName, setFileName] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,6 +17,7 @@ const Create = ({ setShowCreate, addTask }) => {
     const { name, value } = e.target;
     setTask({ ...task, [name]: value });
   };
+
 
   const adjustFileName = (fileName) => {
     if (fileName.length > 15) {
@@ -100,13 +101,8 @@ const Create = ({ setShowCreate, addTask }) => {
                   required
                 />
                 <div className="flex h-10 bg-purple1 items-center justify-between mb-3 rounded-xl">
-                  <span className="p-3">
-                    Due on: {selectedDate ? selectedDate.toDateString() : ""}
-                  </span>
-                  <div
-                    className="bg-gray1 w-1/3 text-sm text-white  h-full overflow-hidden rounded-tr-xl flex justify-center items-center hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 hover:text-blue-800 rounded-br-xl cursor-pointer"
-                    onClick={() => document.getElementById("dueDate").click()}
-                  >
+                  <span className="p-3">Due on: {selectedDate ? formatDate(selectedDate) : ''}</span>
+                  <div className="bg-gray1 w-1/3 text-sm text-white  h-full overflow-hidden rounded-tr-xl flex justify-center items-center hover:bg-blue-200 hover:border-2 hover:border-solid hover:border-blue-500 hover:text-blue-800 rounded-br-xl cursor-pointer" onClick={() => document.getElementById('dueDate').click()}>
                     <DatePicker
                       id="dueDate"
                       selected={selectedDate}
