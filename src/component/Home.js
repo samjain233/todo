@@ -202,7 +202,7 @@ export const Home = () => {
 
       {/* Sort and create task buttons */}
       <div className="flex justify-center">
-        <div className="w-full lg:w-11/12 flex flex-col md:flex-row justify-end md:pr-16">
+        <div className="px-4 py-2 w-full lg:w-11/12 flex flex-col md:flex-row justify-end md:pr-16">
           <Topbar addTask={addTask} handleSort={handleSort} formatDate={formatDate} />
         </div>
       </div>
