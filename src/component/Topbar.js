@@ -29,7 +29,7 @@ const Topbar = ({ addTask, handleSort,formatDate }) => {
 
           {/* Date Created button */}
           <div
-            className={`w-full md:w-40 cursor-pointer flex flex-col font-600 text-[20px] md:rounded-none justify-center hover:bg-cyan-600 text-gray-900 font-bold rounded-tl-lg rounded-bl-lg lg:rounded-none  h-full ${
+            className={`w-full md:w-40 cursor-pointer flex flex-col font-600 text-[20px] md:rounded-none justify-center lg:hover:bg-cyan-600 text-gray-900 font-bold rounded-tl-lg rounded-bl-lg lg:rounded-none  h-full ${
               selectedSort === "dateCreated" ? "bg-[#ACA7D5]" : ""
             }`}
             onClick={() => handleSortClick("dateCreated")}
@@ -39,7 +39,7 @@ const Topbar = ({ addTask, handleSort,formatDate }) => {
 
           {/* Due Date button */}
           <div
-            className={`w-full md:w-40 cursor-pointer flex-col h-full hover:bg-cyan-600 hover:h-full font-600 text-[20px] flex font-bold justify-center  rounded-br-lg rounded-tr-lg ${
+            className={`w-full md:w-40 cursor-pointer flex-col h-full lg:hover:bg-cyan-600 hover:h-full font-600 text-[20px] flex font-bold justify-center  rounded-br-lg rounded-tr-lg ${
               selectedSort === "dueDate" ? "bg-[#ACA7D5]" : ""
             }`}
             onClick={() => handleSortClick("dueDate")}
