@@ -268,13 +268,13 @@ export const Home = () => {
                 {task1.head ? "Description" : "No Task Selected"}
               </div>
               <div className="h-[90%] overflow-auto">
-                <div className="text-[20px] p-2 font-[600] text-left">
+                <div className="text-[20px] p-2 break-all font-[600] text-left">
                   {task1.head}
                 </div>
                 <div className="text-left text-red-600 p-2 text-[14px] font-[600]">
                   {task1.endTime && ('Due : ' + formatDate(task1.endTime))}
                 </div>
-                <div className="text-[18px] p-2 font-[400] text-left">
+                <div className="text-[18px] break-all p-2 font-[400] text-left">
                   {task1.description}
                 </div>
                 {task1.image && (
